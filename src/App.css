@@ -1,38 +1,113 @@
 .App {
   text-align: center;
+  background-color: #15202b;
+  color: white;
+  height: 100vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+  background-color: rgba(255, 255, 255, 0.2);
+  height: 60px;
+  width: 100%;
+  margin-bottom: 30px;
+  line-height: 60px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo {
+  max-width: 100px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.chat {
+  width: 600px;
+  margin: auto;
+  text-align: left;
+}
+
+.chat .chatInput {
+  border: 2px solid #cccccc;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  height: 180px;
+}
+
+.chat .chatInput textarea {
+  width: 100%;
+  height: 120px;
+  border: 0;
+  resize: none;
+  background-color: transparent;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.chat .chatInput textarea:focus {
+  outline: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.chat .chatInput .bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
+
+.chat .chatInput .bottom input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  border: 0;
+  padding: 5px 10px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.chat .chatInput .bottom input[type="submit"]:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.chat .chatInput .bottom .alertPlaceholder {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.chat .chatInput .bottom .alertPlaceholder .alert {
+  color: #721c24;
+  background-color: #f8d7da;
+  padding: 5px 10px;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.chat .ChatOutputUl {
+  padding: 0;
+}
+
+.chat .ChatOutputItem {
+  background-color: #343a40;
+  list-style: none;
+  margin-bottom: 15px;
+  padding: 20px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.chat .ChatOutputItem .info {
+  margin-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.chat .ChatOutputItem .info .userName,
+.chat .ChatOutputItem .info .date {
+  color: #6c757d;
+}
+/*# sourceMappingURL=App.css.map */
