@@ -10,10 +10,26 @@
 
 .navbar {
   background-color: rgba(255, 255, 255, 0.2);
-  height: 60px;
-  width: 100%;
   margin-bottom: 30px;
-  line-height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 15px 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  max-width: 80%;
+  border-radius: 0 0 4px 4px;
+  margin: auto;
+  font-size: 14px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
 }
 
 .logo {
