@@ -25,12 +25,11 @@ class Chat extends React.Component {
    addTweetToArray = newTweet => {
       const tempTweetsArr = this.state.tweets;
       tempTweetsArr.push({
-         id: tempTweetsArr[tempTweetsArr.length - 1].id + 1,
+         id: parseInt(tempTweetsArr[tempTweetsArr.length - 1].id) + 1,
          content: newTweet,
          userName: this.props.userName,
-         date: "dd/mm/yyyy"
+         date: new Date().toISOString()
       });
-      console.log(tempTweetsArr);
       this.setState({ tweets: tempTweetsArr });
    };
    render() {
