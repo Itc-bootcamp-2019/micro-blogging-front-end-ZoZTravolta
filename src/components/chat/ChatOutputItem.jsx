@@ -1,7 +1,6 @@
 import React from "react";
 
 const ChatOutputItem = props => {
-   console.log(props.tweet.id);
    return (
       <li className="ChatOutputItem">
          <div>

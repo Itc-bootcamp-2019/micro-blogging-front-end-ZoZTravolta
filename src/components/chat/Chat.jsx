@@ -22,11 +22,21 @@ class Chat extends React.Component {
          ]
       };
    }
-   addTweetToArray = () => {};
+   addTweetToArray = newTweet => {
+      const tempTweetsArr = this.state.tweets;
+      tempTweetsArr.push({
+         id: tempTweetsArr[tempTweetsArr.length - 1].id + 1,
+         content: newTweet,
+         userName: this.props.userName,
+         date: "dd/mm/yyyy"
+      });
+      console.log(tempTweetsArr);
+      this.setState({ tweets: tempTweetsArr });
+   };
    render() {
       return (
          <div className="chat">
-            <ChatInput />
+            <ChatInput addTweetToArray={this.addTweetToArray} />
             <ChatOutput tweets={this.state.tweets} />
          </div>
       );

@@ -13,7 +13,7 @@ class ChatInput extends React.Component {
    }
 
    handleChange(event) {
-      if (event.target.value.length > 10) {
+      if (event.target.value.length > 140) {
          this.setState({ isAlert: true });
       } else {
          this.setState({ isAlert: false });
@@ -22,7 +22,7 @@ class ChatInput extends React.Component {
    }
 
    handleSubmit(event) {
-      alert("A name was submitted: " + this.state.value);
+      this.props.addTweetToArray(this.state.value);
       event.preventDefault();
    }
 

@@ -16,7 +16,7 @@ class App extends React.Component {
       <div className="App">
         <NavBar userName={this.state.userName} />
         <img src={logo} className="logo" alt={logo} />
-        <Chat />
+        <Chat userName={this.state.userName} />
       </div>
     );
   }
