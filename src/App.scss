@@ -1,3 +1,6 @@
+body {
+   font-family: "Montserrat", sans-serif;
+}
 .App {
    text-align: center;
    background-color: #15202b;
@@ -40,6 +43,8 @@
       padding: 10px;
       font-size: 16px;
       height: 180px;
+      max-width: calc(100% - 4px);
+      margin: auto;
       textarea {
          width: 100%;
          height: 120px;
