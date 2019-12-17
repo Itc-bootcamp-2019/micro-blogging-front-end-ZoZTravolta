@@ -19,6 +19,13 @@ class ChatInput extends React.Component {
          this.setState({ isAlert: false });
          this.setState({ value: event.target.value });
       }
+
+      // localStorage.setItem(
+      //    "currentMessage",
+      //    JSON.stringify({
+      //       currentMessage: this.state.value
+      //    })
+      // );
    }
 
    handleSubmit(event) {

@@ -117,6 +117,7 @@ body {
   padding: 20px;
   border-radius: 6px;
   font-size: 14px;
+  word-break: break-word;
 }
 
 .chat .ChatOutputItem .info {

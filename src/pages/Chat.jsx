@@ -6,32 +6,44 @@ class Chat extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         tweets: [
-            {
-               id: "1",
-               content: "hello world1",
-               userName: "john doe",
-               date: "string (ISO date)"
-            },
-            {
-               id: "2",
-               content: "hello world22",
-               userName: "irena mclafin",
-               date: "string (ISO date)"
-            }
-         ]
+         tweets: this.getTweetsFromLocalStorage()
       };
    }
+
+   getTweetsFromLocalStorage = () => {
+      let tweets = JSON.parse(localStorage.getItem("tweets"));
+      if (tweets === null) {
+         return [];
+      } else {
+         return tweets.tweets;
+      }
+   };
+
    addTweetToArray = newTweet => {
       const tempTweetsArr = this.state.tweets;
       tempTweetsArr.push({
-         id: parseInt(tempTweetsArr[tempTweetsArr.length - 1].id) + 1,
+         id:
+            tempTweetsArr.length === 0
+               ? 0
+               : parseInt(tempTweetsArr[tempTweetsArr.length - 1].id) + 1,
          content: newTweet,
          userName: this.props.userName,
          date: new Date().toISOString()
       });
+      console.log(tempTweetsArr);
       this.setState({ tweets: tempTweetsArr });
+      this.saveTweetsToLocalStorage();
    };
+
+   saveTweetsToLocalStorage = () => {
+      localStorage.setItem(
+         "tweets",
+         JSON.stringify({
+            tweets: this.state.tweets
+         })
+      );
+   };
+
    render() {
       return (
          <div className="chat">
