@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Chat from "./components/chat/Chat";
+import Chat from "./pages/Chat";
+import Profile from './pages/profile'
 //import NavBar from './components/NavBar'
 import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
 
@@ -35,7 +36,7 @@ class App extends React.Component {
             </Route>
 
             <Route path="/profile" >
-              <div> profile</div>
+              <Profile />
             </Route>
 
           </Switch>
