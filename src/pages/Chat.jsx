@@ -1,70 +1,54 @@
 import React from "react";
 import ChatInput from "../components/chat/ChatInput";
 import ChatOutput from "../components/chat/ChatOutput";
-import { getAllTweetsFromServer } from "../lib/api";
-import { addTweetToServer } from "../lib/api";
+import { apiGetAllTweetsFromServer } from "../lib/api";
+import { apiAddTweetToServer } from "../lib/api";
 
 class Chat extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         tweets: []
+         tweets: [],
+         loading: true
       };
    }
 
-   async componentDidMount() {
-      const response = await getAllTweetsFromServer();
-      console.log(response.data.tweets);
+   componentDidMount() {
+      this.getAllTweetsFromServer();
+   }
+
+   async getAllTweetsFromServer() {
+      this.setState({ loading: true });
+      const response = await apiGetAllTweetsFromServer();
       this.setState({ tweets: response.data.tweets });
+      this.setState({ loading: false });
    }
-   async sendToAddTweetToServer(content) {
-      const response = await addTweetToServer(
-         "zoz",
-         content,
-         new Date().toISOString()
-      );
-      console.log(response);
-   }
-   //==================================================
-   getTweetsFromLocalStorage = () => {
-      this.getTweetsFromServer();
-      let tweets = JSON.parse(localStorage.getItem("tweets"));
-      if (tweets === null) {
-         return [];
-      } else {
-         return tweets.tweets;
+
+   async addTweetToServer(content) {
+      let response;
+      try {
+         response = await apiAddTweetToServer(
+            this.props.userName,
+            content,
+            new Date().toISOString()
+         );
+         console.log(response.status);
+         this.getAllTweetsFromServer();
+      } catch {
+         console.log(response.status);
       }
-   };
-
-   addTweetToArray = newTweet => {
-      const tempTweetsArr = this.state.tweets;
-      tempTweetsArr.push({
-         id:
-            tempTweetsArr.length === 0
-               ? 0
-               : parseInt(tempTweetsArr[tempTweetsArr.length - 1].id) + 1,
-         content: newTweet,
-         userName: this.props.userName,
-         date: new Date().toISOString()
-      });
-      this.setState({ tweets: tempTweetsArr });
-      this.saveTweetsToLocalStorage();
-   };
-
-   saveTweetsToLocalStorage = () => {
-      localStorage.setItem(
-         "tweets",
-         JSON.stringify({
-            tweets: this.state.tweets
-         })
-      );
-   };
+   }
 
    render() {
       return (
          <div className="chat">
-            <ChatInput sendToAddTweetToServer={this.sendToAddTweetToServer} />
-            <ChatOutput tweets={this.state.tweets} />
+            <ChatInput
+               sendToAddTweetToServer={this.addTweetToServer.bind(this)}
+            />
+            <ChatOutput
+               tweets={this.state.tweets}
+               loading={this.state.loading}
+            />
          </div>
       );
    }
