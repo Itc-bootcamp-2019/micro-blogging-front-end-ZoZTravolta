@@ -29,7 +29,7 @@ class ChatInput extends React.Component {
    }
 
    handleSubmit(event) {
-      this.props.addTweetToArray(this.state.value);
+      this.props.sendToAddTweetToServer(this.state.value);
       event.preventDefault();
    }
 
