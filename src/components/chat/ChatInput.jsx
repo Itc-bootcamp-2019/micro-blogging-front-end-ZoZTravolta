@@ -5,7 +5,8 @@ class ChatInput extends React.Component {
       super(props);
       this.state = {
          value: "",
-         isAlert: false
+         isAlert: false,
+         buttonDisabled: true
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -13,19 +14,16 @@ class ChatInput extends React.Component {
    }
 
    handleChange(event) {
+      if (event.target.value.length >= 0) {
+         this.setState({ buttonDisabled: false });
+      }
       if (event.target.value.length > 140) {
          this.setState({ isAlert: true });
+         this.setState({ buttonDisabled: true });
       } else {
          this.setState({ isAlert: false });
          this.setState({ value: event.target.value });
       }
-
-      // localStorage.setItem(
-      //    "currentMessage",
-      //    JSON.stringify({
-      //       currentMessage: this.state.value
-      //    })
-      // );
    }
 
    handleSubmit(event) {
@@ -52,7 +50,7 @@ class ChatInput extends React.Component {
                   <input
                      type="submit"
                      value="Submit"
-                     disabled={this.state.isAlert}
+                     disabled={this.state.buttonDisabled}
                   />
                </div>
             </form>
