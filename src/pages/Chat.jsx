@@ -9,7 +9,8 @@ class Chat extends React.Component {
       super(props);
       this.state = {
          tweets: [],
-         loading: true
+         loading: true,
+         error: null
       };
    }
 
@@ -19,23 +20,26 @@ class Chat extends React.Component {
 
    async getAllTweetsFromServer() {
       this.setState({ loading: true });
-      const response = await apiGetAllTweetsFromServer();
-      this.setState({ tweets: response.data.tweets });
-      this.setState({ loading: false });
+      try {
+         let response = await apiGetAllTweetsFromServer();
+         this.setState({ tweets: response.data.tweets });
+         this.setState({ loading: false });
+      } catch (response) {
+         this.setState({ loading: false });
+         this.setState({ error: response.response.status });
+      }
    }
 
    async addTweetToServer(content) {
-      let response;
       try {
-         response = await apiAddTweetToServer(
+         await apiAddTweetToServer(
             this.props.userName,
             content,
             new Date().toISOString()
          );
-         console.log(response.status);
          this.getAllTweetsFromServer();
-      } catch {
-         console.log(response.status);
+      } catch (response) {
+         this.setState({ error: response.response.data });
       }
    }
 
@@ -48,6 +52,7 @@ class Chat extends React.Component {
             <ChatOutput
                tweets={this.state.tweets}
                loading={this.state.loading}
+               error={this.state.error}
             />
          </div>
       );

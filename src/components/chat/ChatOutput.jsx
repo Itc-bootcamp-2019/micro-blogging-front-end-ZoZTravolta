@@ -7,6 +7,11 @@ const ChatOutput = props => {
          {props.loading === true ? (
             <li className="ChatOutputItem">loading...</li>
          ) : null}
+         {props.error !== null ? (
+            <li className="ChatOutputItem">
+               Sorry, we have an error: {props.error}
+            </li>
+         ) : null}
 
          {props.tweets.length !== 0
             ? // [...props.tweets].reverse().map(tweet => {
