@@ -14,16 +14,19 @@ class ChatInput extends React.Component {
    }
 
    handleChange(event) {
-      if (event.target.value.length >= 0) {
-         this.setState({ buttonDisabled: false });
-      }
       if (event.target.value.length > 140) {
-         this.setState({ isAlert: true });
-         this.setState({ buttonDisabled: true });
-      } else {
-         this.setState({ isAlert: false });
-         this.setState({ value: event.target.value });
+         this.setState({ isAlert: true, buttonDisabled: true });
+         return;
       }
+      if (event.target.value.length === 0) {
+         this.setState({ buttonDisabled: true });
+         return;
+      }
+      this.setState({
+         buttonDisabled: false,
+         isAlert: false,
+         value: event.target.value
+      });
    }
 
    handleSubmit(event) {
