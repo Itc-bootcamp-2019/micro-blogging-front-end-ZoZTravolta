@@ -1,6 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = props => {
-   return <div></div>;
+   return (
+      <div className="navbar">
+         <span className="links">
+            <Link to="/">About</Link>
+            <Link to="/profile">profile</Link>
+         </span>
+         <span className="hiUser">hi, {props.userName}</span>
+      </div>
+   );
 };
 export default NavBar;

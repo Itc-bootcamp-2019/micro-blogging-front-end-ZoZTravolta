@@ -14,7 +14,7 @@ body {
 
 .navbar {
   background-color: rgba(255, 255, 255, 0.2);
-  margin-bottom: 30px;
+  margin-bottom: 52px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -133,5 +133,48 @@ body {
 .chat .ChatOutputItem .info .userName,
 .chat .ChatOutputItem .info .date {
   color: #6c757d;
+}
+
+.profile {
+  width: 600px;
+  margin: auto;
+  text-align: left;
+}
+
+.profile h1 {
+  font-size: 36px;
+  margin-bottom: 26px;
+  font-weight: normal;
+}
+
+.profile label {
+  font-size: 18px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.profile input {
+  height: 60px;
+  border: 2px solid #cccccc;
+  background-color: transparent;
+  width: calc(100% - 2px);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 6px;
+  padding: 16px 20px;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.profile button {
+  float: right;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  border: 0;
+  padding: 8px 15px;
+  line-height: 20px;
+  cursor: pointer;
 }
 /*# sourceMappingURL=App.css.map */

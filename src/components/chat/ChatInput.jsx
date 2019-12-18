@@ -45,7 +45,10 @@ class ChatInput extends React.Component {
       return (
          <div className="chatInput">
             <form onSubmit={this.handleSubmit}>
-               <textarea onChange={this.handleChange} />
+               <textarea
+                  onChange={this.handleChange}
+                  placeholder="Whats on your mind?"
+               />
                <div className="bottom">
                   <div className="alertPlaceholder">
                      {this.state.isAlert && this.alertBox()}

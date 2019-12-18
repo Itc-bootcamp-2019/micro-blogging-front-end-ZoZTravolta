@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Chat from "./pages/Chat";
 import Profile from './pages/profile'
-//import NavBar from './components/NavBar'
-import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import NavBar from './components/NavBar'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -18,17 +18,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-          <div className="navbar">
-
-            <span className="links">
-              <Link to="/">About</Link>
-              <Link to="/profile">profile</Link>
-            </span>
-            <span className="hiUser">
-              hi, {this.state.userName}
-            </span>
-          </div>
-
+          <NavBar userName={this.state.userName} />
           <Switch>
             <Route exact path="/" >
               <img src={logo} className="logo" alt={logo} />
@@ -36,7 +26,7 @@ class App extends React.Component {
             </Route>
 
             <Route path="/profile" >
-              <Profile />
+              <Profile userName={this.state.userName} />
             </Route>
 
           </Switch>

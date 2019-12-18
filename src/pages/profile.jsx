@@ -1,13 +1,16 @@
 import React from "react";
 
-class Profile extends React.Component {
-   render() {
-      return (
+const Profile = props => {
+   return (
+      <div className="profile">
+         <h1>Profile</h1>
+         <label>User Name</label>
          <div>
-            <div>profile</div>
+            <input type="text" placeholder={props.userName}></input>
+            <button>Save</button>
          </div>
-      );
-   }
-}
+      </div>
+   );
+};
 
 export default Profile;
