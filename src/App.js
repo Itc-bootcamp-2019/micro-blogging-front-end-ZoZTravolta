@@ -11,27 +11,48 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      userName: "zoz",
+      userName: this.getTweetsFromLocalStorage(),
     }
   }
+  getTweetsFromLocalStorage = () => {
+    let userName = JSON.parse(localStorage.getItem("UserName"));
+    if (userName === null || userName === undefined) {
+      console.log('no user', userName)
+      return null;
+    } else {
+      return userName.userName;
+    }
+  };
+  saveNameToLocalStorage = (userName) => {
+    this.setState({ userName: userName })
+    localStorage.setItem(
+      "UserName",
+      JSON.stringify({
+        userName: userName
+      })
+    );
+  };
+
   render() {
     return (
       <div className="App">
         <Router>
           <NavBar userName={this.state.userName} />
           <Switch>
-            <Route exact path="/" >
+
+            <Route path={this.state.userName !== null ? "/profile" : "/"}  >
+              <Profile userName={this.state.userName} saveNameToLocalStorage={this.saveNameToLocalStorage.bind(this)} />
+            </Route>
+
+            <Route path="/" >
               <img src={logo} className="logo" alt={logo} />
               <Chat userName={this.state.userName} />
             </Route>
 
-            <Route path="/profile" >
-              <Profile userName={this.state.userName} />
-            </Route>
 
           </Switch>
         </Router>
-      </div>
+      </div >
     );
   }
 }

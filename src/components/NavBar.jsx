@@ -5,8 +5,8 @@ const NavBar = props => {
    return (
       <div className="navbar">
          <span className="links">
-            <Link to="/">About</Link>
-            <Link to="/profile">profile</Link>
+            <Link to="/">Home</Link>
+            <Link to="/profile">Profile</Link>
          </span>
          <span className="hiUser">hi, {props.userName}</span>
       </div>
