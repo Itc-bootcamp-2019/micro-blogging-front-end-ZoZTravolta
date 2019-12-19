@@ -39,17 +39,13 @@ class App extends React.Component {
         <Router>
           <NavBar userName={this.state.userName} />
           <Switch>
-
             <Route path={this.state.userName !== null ? "/profile" : "/"}  >
               <Profile userName={this.state.userName} saveNameToLocalStorage={this.saveNameToLocalStorage.bind(this)} />
             </Route>
-
             <Route path="/" >
               <img src={logo} className="logo" alt={logo} />
               <Chat userName={this.state.userName} />
             </Route>
-
-
           </Switch>
         </Router>
       </div >

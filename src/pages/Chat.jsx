@@ -4,13 +4,16 @@ import ChatOutput from "../components/chat/ChatOutput";
 import { apiGetAllTweetsFromServer } from "../lib/api";
 import { apiAddTweetToServer } from "../lib/api";
 
+export const chatContext = React.createContext();
+
 class Chat extends React.Component {
-   constructor(props) {
-      super(props);
+   constructor() {
+      super();
       this.state = {
          tweets: [],
          loading: true,
-         error: null
+         error: null,
+         addTweetToLocalArray: this.addTweetToLocalArray.bind(this)
       };
    }
 
@@ -36,31 +39,47 @@ class Chat extends React.Component {
       }
    }
 
-   async addTweetToServer(content) {
-      const obj = JSON.parse(localStorage.getItem("UserName"));
+   async addTweetToServer(content, name) {
       try {
-         await apiAddTweetToServer(
-            obj.userName,
-            content,
-            new Date().toISOString()
-         );
-         this.getAllTweetsFromServer();
+         await apiAddTweetToServer(name, content, new Date().toISOString());
       } catch (response) {
          this.setState({ error: response.response.data });
       }
    }
 
+   addTweetToLocalArray = content => {
+      const obj = JSON.parse(localStorage.getItem("UserName"));
+      const name = obj.userName;
+      const tempTweetsArr = this.state.tweets;
+      tempTweetsArr.unshift({
+         content: content,
+         userName: name,
+         date: new Date().toISOString()
+      });
+      this.saveArrayToLocalStorage();
+      this.addTweetToServer(content, name);
+   };
+
+   saveArrayToLocalStorage = () => {
+      localStorage.setItem(
+         "tweets",
+         JSON.stringify({ tweets: this.state.tweets })
+      );
+      this.getTweetsFromLocalStorage();
+   };
+
+   getTweetsFromLocalStorage = () => {
+      let tweets = JSON.parse(localStorage.getItem("tweets"));
+      this.setState({ tweets: tweets.tweets });
+   };
+
    render() {
       return (
          <div className="chat">
-            <ChatInput
-               sendToAddTweetToServer={this.addTweetToServer.bind(this)}
-            />
-            <ChatOutput
-               tweets={this.state.tweets}
-               loading={this.state.loading}
-               error={this.state.error}
-            />
+            <chatContext.Provider value={this.state}>
+               <ChatInput />
+               <ChatOutput />
+            </chatContext.Provider>
          </div>
       );
    }

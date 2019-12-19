@@ -1,4 +1,5 @@
 import React from "react";
+import { chatContext } from "../../pages/Chat";
 
 class ChatInput extends React.Component {
    constructor(props) {
@@ -10,7 +11,6 @@ class ChatInput extends React.Component {
       };
 
       this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
    }
 
    handleChange(event) {
@@ -29,11 +29,6 @@ class ChatInput extends React.Component {
       });
    }
 
-   handleSubmit(event) {
-      this.props.sendToAddTweetToServer(this.state.value);
-      event.preventDefault();
-   }
-
    alertBox() {
       return (
          <div className="alert">
@@ -44,22 +39,33 @@ class ChatInput extends React.Component {
    render() {
       return (
          <div className="chatInput">
-            <form onSubmit={this.handleSubmit}>
-               <textarea
-                  onChange={this.handleChange}
-                  placeholder="Whats on your mind?"
-               />
-               <div className="bottom">
-                  <div className="alertPlaceholder">
-                     {this.state.isAlert && this.alertBox()}
-                  </div>
-                  <input
-                     type="submit"
-                     value="Submit"
-                     disabled={this.state.buttonDisabled}
-                  />
-               </div>
-            </form>
+            <chatContext.Consumer>
+               {context => (
+                  <form
+                     onSubmit={event => {
+                        this.setState({ value: "" });
+                        context.addTweetToLocalArray(this.state.value);
+                        event.preventDefault();
+                     }}
+                  >
+                     <textarea
+                        onChange={this.handleChange}
+                        placeholder="Whats on your mind?"
+                        value={this.state.value}
+                     />
+                     <div className="bottom">
+                        <div className="alertPlaceholder">
+                           {this.state.isAlert && this.alertBox()}
+                        </div>
+                        <input
+                           type="submit"
+                           value="Submit"
+                           disabled={this.state.buttonDisabled}
+                        />
+                     </div>
+                  </form>
+               )}
+            </chatContext.Consumer>
          </div>
       );
    }
