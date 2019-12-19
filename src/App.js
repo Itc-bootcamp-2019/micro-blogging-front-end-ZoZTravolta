@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      userName: this.getTweetsFromLocalStorage(),
+      userName: '',
     }
   }
   getTweetsFromLocalStorage = () => {
@@ -32,6 +32,12 @@ class App extends React.Component {
       })
     );
   };
+
+  componentDidMount() {
+    this.setState({ userName: this.getTweetsFromLocalStorage() })
+  }
+
+
 
   render() {
     return (
