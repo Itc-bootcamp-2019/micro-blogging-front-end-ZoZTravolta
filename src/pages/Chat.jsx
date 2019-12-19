@@ -16,10 +16,16 @@ class Chat extends React.Component {
 
    componentDidMount() {
       this.getAllTweetsFromServer();
+      setInterval(() => {
+         console.log("updating chat..");
+         this.getAllTweetsFromServer();
+      }, 10000);
    }
 
    async getAllTweetsFromServer() {
-      this.setState({ loading: true });
+      if (this.state.tweets === []) {
+         this.setState({ loading: true });
+      }
       try {
          let response = await apiGetAllTweetsFromServer();
          this.setState({ tweets: response.data.tweets });
@@ -31,9 +37,10 @@ class Chat extends React.Component {
    }
 
    async addTweetToServer(content) {
+      const obj = JSON.parse(localStorage.getItem("UserName"));
       try {
          await apiAddTweetToServer(
-            this.props.userName,
+            obj.userName,
             content,
             new Date().toISOString()
          );
